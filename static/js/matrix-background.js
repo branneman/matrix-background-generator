@@ -1,8 +1,8 @@
 (function() {
 
     // Settings
-    var fps = 60;
-    var loopLength = 10;
+    var fps = 8;
+    var loopLength = 15;
     var chr = 'abcdefghijklmnopqrstuvwxyz0123456789!"#$%&\'()*+,-./:;<=>?[\\]^_{|}~-\u00AD';
 
     // Cache DOM queries
@@ -30,18 +30,20 @@
         for (var x = 0; x < w; x++) {
 
             var line = [];
-            var paintLine = Math.random() > .3; // 30% chance of generating a line
+            var paintLine = true;
+
+            var randomRange = Math.random() < .05 ? 75 : 20;
 
             while (line.length < animLength) {
 
-                var lineLength = Math.floor(Math.random() * 30);
+                var lineLength  = Math.floor(Math.random() * randomRange);
 
                 for (var i = 0; i < lineLength; i++) {
 
                     if (paintLine) {
                         line.push({
                             char: chr[Math.floor(Math.random() * chr.length)],
-                            opacity: 1.1 - (i / lineLength) // range: 0.1 - 1.1
+                            opacity: (i / lineLength)
                         });
                     } else {
                         line.push(false);
