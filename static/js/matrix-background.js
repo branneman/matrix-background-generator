@@ -60,7 +60,7 @@
                     if (paintLine) {
                         line.push({
                             char: chr[Math.floor(Math.random() * chr.length)],
-                            opacity: ((i === lineLength - 1) ? 1 : (i / lineLength))
+                            opacity: ((i === lineLength - 1) ? 1 : .4 + (i / lineLength))
                         });
                     } else {
                         line.push(false);
