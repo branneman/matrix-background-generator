@@ -2,13 +2,13 @@
 
     // Settings
     var settings = {
-        fps: 8,
-        loopLength: 15,
+        fps: 9,
+        loopLength: 10,
         sqSize: 15,
         width: window.innerWidth,
         height: window.innerHeight
     };
-    var chr = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!"#$%&\'()*+,-./:;<=>?[\\]^_{|}~-\u00AD';
+    var chr = 'abcdefghijklmnopqrstuvwxyzABCDEFQRSXYZ0123456789!"#$%&\'()*+,-./:;<=>?[\\]^_{|}~-\u00AD';
 
     // Cache DOM queries
     var cnvs = document.getElementById('the-matrix');
