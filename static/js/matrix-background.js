@@ -8,7 +8,7 @@
         width: window.innerWidth,
         height: window.innerHeight
     };
-    var chr = 'abcdefghijklmnopqrstuvwxyz0123456789!"#$%&\'()*+,-./:;<=>?[\\]^_{|}~-\u00AD';
+    var chr = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!"#$%&\'()*+,-./:;<=>?[\\]^_{|}~-\u00AD';
 
     // Cache DOM queries
     var cnvs = document.getElementById('the-matrix');
