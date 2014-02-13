@@ -27,9 +27,13 @@
 
     // Frame loop timings
     var code  = generateAnimation();
-    console.log(code);
     var time  = 1000 * settings.loopLength;
     var start = Date.now();
+
+    // Reload page on window resize
+    window.addEventListener('resize', function() {
+        window.location.reload();
+    });
 
     // Start animation
     setInterval(tick, 1000 / settings.fps);
