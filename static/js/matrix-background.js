@@ -2,7 +2,7 @@
 
     // Settings
     var settings = {
-        fps: 9,
+        fps: 8,
         loopLength: 10,
         sqSize: 15,
         width: window.innerWidth,
