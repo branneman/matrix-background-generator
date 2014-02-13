@@ -45,11 +45,11 @@
             var line = [];
             var paintLine = true;
 
-            var randomRange = Math.random() < .05 ? 75 : 30; // 5% chance on a 'spike' (75-char long line)
+            var randomRange = (Math.random() < .05 ? 70 : 25); // 5% chance on a very long line
 
             while (line.length < animLength) {
 
-                var lineLength = Math.floor(Math.random() * randomRange);
+                var lineLength = 5 + Math.floor(Math.random() * randomRange);
 
                 for (var i = 0; i < lineLength; i++) {
 
@@ -127,9 +127,9 @@
                         mtrx.fillStyle = 'rgba(0, 204, 0, ' + point.opacity + ')'; // rgb(0,204,0) = #0c0
                     }
 
-                    // 10% chance of generating random different character
+                    // 25% chance of generating random different character
                     var char = point.char;
-                    if (Math.random() < 0.25) {
+                    if (Math.random() < .25) {
                         char = chr[Math.floor(Math.random() * chr.length)];
                     }
 
