@@ -1,49 +1,62 @@
 (function() {
 
     // Settings
-    var fps = 8;
-    var loopLength = 15;
+    var settings = {
+        fps: 8,
+        loopLength: 15,
+        sqSize: 15,
+        width: window.innerWidth,
+        height: window.innerHeight
+    };
     var chr = 'abcdefghijklmnopqrstuvwxyz0123456789!"#$%&\'()*+,-./:;<=>?[\\]^_{|}~-\u00AD';
 
     // Cache DOM queries
     var cnvs = document.getElementById('the-matrix');
     var mtrx = cnvs.getContext('2d');
 
+    // Set canvas size
+    cnvs.setAttribute('width', settings.width);
+    cnvs.setAttribute('height', settings.height);
+
+    // Cache
+    var squaresHorizontal = Math.floor(cnvs.width / settings.sqSize);
+    var squaresVertical   = Math.floor(cnvs.height / settings.sqSize);
+    var animLength        = squaresVertical * 10;
+    var pxOffsetX         = Math.floor((cnvs.width - settings.sqSize * squaresHorizontal) / 2);
+    var pxOffsetY         = Math.floor((cnvs.height - settings.sqSize * squaresVertical) / 2);
+
     // Frame loop timings
-    var code = generateAnimation();
-    var time  = 1000 * loopLength;
+    var code  = generateAnimation();
+    console.log(code);
+    var time  = 1000 * settings.loopLength;
     var start = Date.now();
 
     // Start animation
-    setInterval(tick, 1000 / fps);
+    setInterval(tick, 1000 / settings.fps);
 
     //
     // Generate animation
     //
     function generateAnimation() {
 
-        var w = 33; // cnvs.width;
-        var h = 33; // cnvs.height;
-        var animLength = h * 10;
-
         var code = [];
-        for (var x = 0; x < w; x++) {
+        for (var x = 0; x < squaresHorizontal; x++) {
 
             var line = [];
             var paintLine = true;
 
-            var randomRange = Math.random() < .05 ? 75 : 20;
+            var randomRange = Math.random() < .05 ? 75 : 30; // 5% chance on a 'spike' (75-char long line)
 
             while (line.length < animLength) {
 
-                var lineLength  = Math.floor(Math.random() * randomRange);
+                var lineLength = Math.floor(Math.random() * randomRange);
 
                 for (var i = 0; i < lineLength; i++) {
 
                     if (paintLine) {
                         line.push({
                             char: chr[Math.floor(Math.random() * chr.length)],
-                            opacity: (i / lineLength)
+                            opacity: ((i === lineLength - 1) ? 1 : (i / lineLength))
                         });
                     } else {
                         line.push(false);
@@ -72,8 +85,9 @@
         }
         var frame = (now - start) / time;
 
+        // Draw frame
         clearCanvas();
-        drawMatrix(frame);
+        drawFrame(frame);
     }
 
     //
@@ -89,27 +103,40 @@
         mtrx.fillRect(0, 0, 500, 500);
 
         // Set text styles
-        //mtrx.fillStyle = '#0c0';
         mtrx.font = '18px Matrix';
     }
 
     //
     // Called every frame
     //
-    function drawMatrix(frame) {
+    function drawFrame(frame) {
 
-        var sqSize = 15;
-        var animLength = code[0].length;
-        var offset = Math.round((animLength - 33) * frame);
+        var offsetY = Math.round((animLength - squaresVertical) * frame);
 
-        for (var x = 0; x < 33; x++) {
+        for (var x = 0; x < squaresHorizontal; x++) {
 
-            for (var y = 0; y < 33; y++) {
+            for (var y = 0; y < squaresVertical; y++) {
 
-                var char = code[x][animLength - 33 - offset + y];
-                if (char) {
-                    mtrx.fillStyle = 'rgba(0, 204, 0, ' + char.opacity + ')'; // rgb(0,204,0) = #0c0
-                    mtrx.fillText(char.char, x * sqSize + 4, y * sqSize + 16);
+                var point = code[x][animLength - squaresVertical - offsetY + y];
+                if (point) {
+
+                    // Set color & opacity
+                    if (point.opacity === 1) {
+                        mtrx.fillStyle = 'rgb(150, 204, 150)';
+                    } else {
+                        mtrx.fillStyle = 'rgba(0, 204, 0, ' + point.opacity + ')'; // rgb(0,204,0) = #0c0
+                    }
+
+                    // 10% chance of generating random different character
+                    var char = point.char;
+                    if (Math.random() < 0.25) {
+                        char = chr[Math.floor(Math.random() * chr.length)];
+                    }
+
+                    // Draw character
+                    var posX = x * settings.sqSize + pxOffsetX;
+                    var posY = y * settings.sqSize + settings.sqSize + pxOffsetY;
+                    mtrx.fillText(char, posX, posY);
                 }
             }
         }
