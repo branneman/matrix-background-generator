@@ -226,9 +226,9 @@
         var x = i * settings.sqSize;
         var y = (cnvs.height / 2);
         var w = settings.sqSize;
-        var h = (cnvs.height / 2) * frequency;
+        var h = (cnvs.height / 3) * frequency;
         mtrx.fillRect(x, y, w, h);
-        //mtrx.fillRect(x, y, w, -h);
+        mtrx.fillRect(x, y, w, -h);
     }
 
     //
