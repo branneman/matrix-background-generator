@@ -5,6 +5,7 @@
         fps: 8,
         loopLength: 10,
         sqSize: 15,
+        fontSize: '16px',
         width: window.innerWidth,
         height: window.innerHeight
     };
@@ -107,7 +108,7 @@
         mtrx.fillRect(0, 0, 500, 500);
 
         // Set text styles
-        mtrx.font = '18px Matrix';
+        mtrx.font = settings.fontSize + ' Matrix, Consolas, monospace';
     }
 
     //
