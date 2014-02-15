@@ -112,7 +112,7 @@
     }
 
     //
-    // Called every frame
+    // Draw a single frame
     //
     function drawFrame(frame) {
 
