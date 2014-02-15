@@ -14,6 +14,7 @@ app.use(express.favicon('favicon.ico'));
 app.use('/static', express.static('static/'));
 
 // Start server
-app.listen(80);
-console.log('Listening on port 80');
+var port = 1337;
+app.listen(port);
+console.log('Listening on port ' + port);
 console.log('Use Ctrl+C or SIGINT to exit.');
