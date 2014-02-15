@@ -4,9 +4,9 @@
     var settings = {
         fps: 60, // Must be bigger than 1
         sqSize: 15,
-        src: '/static/mp3/Marilyn-Manson-Rock-is-Dead.mp3',
+        //src: '/static/mp3/Marilyn-Manson-Rock-is-Dead.mp3',
         //src: '/static/mp3/Rammstein-Du-hast.mp3',
-        //src: '/static/mp3/Rage-Against-The-Machine-Wake-Up.mp3',
+        src: '/static/mp3/Rage-Against-The-Machine-Wake-Up.mp3',
         width: window.innerWidth,
         height: window.innerHeight
     };
@@ -204,6 +204,7 @@
             var char = chr[Math.floor(Math.random() * chr.length)];
 
             // Determine color
+            mtrx.font = '18px Matrix, Consolas, monospace';
             mtrx.fillStyle = '#0c0';
 
             var y1 = (cnvs.height / 2) - settings.sqSize * ii;
